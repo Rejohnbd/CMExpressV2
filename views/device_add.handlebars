@@ -1,0 +1,157 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {{#if data }}
+            Edit Device
+            {{else }}
+            Add Device
+            {{/if }}
+        </li>
+    </ol>
+</nav>
+
+<div class="card mb-3">
+    <div class="card-header bg-black">
+        {{#if data }}
+           <h3>Edit Device Form</h3> 
+        {{else }}
+            <h3>Device Add Form</h3>
+        {{/if}}
+    </div>
+    <div class="card-body bg-light-black">
+
+         <form role="form" {{#if data }}action="update" {{else}} action="/webdevice/save" {{/if}} method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputDeviceId">Device Id</label>
+                    <input type="hidden" class="form-control" name="_id" value="{{ data._id}}" required >
+                    <input type="text" class="form-control" id="inputDeviceId" name="device_id" placeholder="Enter Device Id" value="{{#if data }}{{ data.device_id }}{{/if}}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputSimNumber">Sim Number</label>
+                    <input type="text" class="form-control" id="inputSimNumber" name="sim_number" placeholder="Enter SIM Number" value="{{#if data }}{{ data.sim_number }}{{/if}}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputMinTemp">Minimum Temperature</label>
+                    <input type="number" id="inputMinTemp" class="form-control" name="tempareture_min" placeholder="Enter Minimum Temperature" value="{{#if data }}{{ data.tempareture_min }}{{/if}}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputMaxTemp">Maximum Temperature</label>
+                    <input type="number" class="form-control" id="inputMinTemp" name="tempareture_max" placeholder="Enter Minimum Temperature" value="{{#if data }}{{ data.tempareture_max }}{{/if}}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputMinHumi">Minimum Humidity</label>
+                    <input type="number" id="inputMinHumi" class="form-control" name="humidity_min" placeholder="Enter Minimum Humidity" value="{{#if data }}{{ data.humidity_min }}{{/if}}" min="1">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputMaxHumi">Maximum Humidity</label>
+                    <input type="number" class="form-control" id="inputMaxHumi" name="humidity_max" placeholder="Enter Minimum Humidity" value="{{#if data }}{{ data.humidity_max }}{{/if}}" min="1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputLocation">Location</label>
+                <textarea id="inputLocation" class="form-control" rows="3" name="location" placeholder="Location">{{#if data }}{{ data.location }}{{/if}}</textarea>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="isAssigned" name="is_assign" {{#if data.is_assign }}checked{{/if }} value="true">
+                <label class="form-check-label" for="isAssigned">
+                    Is Assigned
+                </label>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block">{{#if data }} Update {{else }} Submit {{/if}}Device</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="reset" class="btn btn-block btn-info">Reset Device</button>
+                </div>
+            </div> 
+        </form>          
+    </div>
+</div>
+
+
+{{!--<div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{#if data }}
+                    Edit Device Form
+                    {{else }}
+                    Device Add Form
+                    {{/if}}
+                </div>
+                {{#if massage }}
+                <small>{{ massage }}</small>
+                {{/if}}
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form role="form" {{#if data }}action="update" {{else}} action="/webdevice/save" {{/if}}
+                                method="POST">
+                                <div class="form-group">
+                                    <label>Device Id</label>
+                                    {{#if data }}
+                                    <input class="form-control" type="hidden" name="_id" value="{{ data._id}}" required>
+                                    {{/if }}
+                                    <input class="form-control" name="device_id" placeholder="Enter Device Id"
+                                        value="{{#if data }}{{ data.device_id }}{{/if}}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Sim Number</label>
+                                    <input class="form-control" name="sim_number" placeholder="Enter SIM Number"
+                                        value="{{#if data }}{{ data.sim_number }}{{/if}}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Minimum Temperature</label>
+                                    <input class="form-control" type="number" name="tempareture_min"
+                                        placeholder="Enter Minimum Temperature"
+                                        value="{{#if data }}{{ data.tempareture_min }}{{/if}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Maximum Temperature</label>
+                                    <input class="form-control" type="number" name="tempareture_max"
+                                        placeholder="Enter Minimum Temperature"
+                                        value="{{#if data }}{{ data.tempareture_max }}{{/if}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Maximum Humidity</label>
+                                    <input class="form-control" type="number" name="humidity_min"
+                                        placeholder="Enter Minimum Humidity"
+                                        value="{{#if data }}{{ data.humidity_min }}{{/if}}" min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Maximum Humidity</label>
+                                    <input class="form-control" type="number" name="humidity_max"
+                                        placeholder="Enter Minimum Humidity"
+                                        value="{{#if data }}{{ data.humidity_max }}{{/if}}" min="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Location</label>
+                                    <textarea class="form-control" type="number" name="location" rows="3"
+                                        placeholder="Location">{{#if data }}{{ data.location }}{{/if}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Is Assigned</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="is_assign" type="checkbox"
+                                                {{#if data.is_assign }}checked{{/if }} value="true">Assigned
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-success col-md-6">{{#if data }} Update {{else }}
+                                    Submit {{/if}}Device</button>
+                                <a href="" type="reset" class="btn btn-warning col-md-6">Reset Device</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>--}}

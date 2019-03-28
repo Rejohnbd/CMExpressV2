@@ -1,0 +1,67 @@
+<script type="text/javascript">
+    function confirm_delete() {
+    return confirm('are you sure?');
+    }
+</script>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Device List</li>
+    </ol>
+</nav>
+
+<div class="mt-5 mb-5">
+    <table id="userDeviceList" class="table table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Sim Number</th>
+                <th>Location</th>
+                {{!-- <th>Min. Temp.</th>
+                <th>Max. Temp.</th>
+                <th>Min. Humi.</th>
+                <th>Max. Humi.</th> --}}
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each datas}}
+            <tr>
+                <td><a href="device_details.html" class="text-white">{{ device_id }}</a></td>
+                <td>{{ sim_number }}</td>
+                <td>{{ location }}</td>
+                {{!-- <td>{{ tempareture_min }}</td>
+                <td>{{ tempareture_max }}</td>
+                <td>{{ humidity_min }}</td>
+                <td>{{ humidity_max }}</td> --}}
+                <td>
+                    {{#if is_assign }}
+                        <a class="btn btn-sm btn-success">Assigned</a>
+                    {{else}}
+                        <a class="btn btn-sm btn-warning">Unassigned</a>
+                    {{/if}}                                            
+                </td>
+                <td class="center">
+                    <a href="/webdevice/{{ _id }}" class="btn btn-sm btn-info" title="Edit Device"><i class="fas fa-edit"></i></a>
+                    <a href="/webdevice/delete/{{ _id }}" class="btn btn-sm btn-danger" title="Delete Device" onclick="return confirm_delete()"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+            {{/each }}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Device Id</th>
+                <th>Sim Number</th>
+                <th>Location</th>
+                {{!-- <th>Min. Temp.</th>
+                <th>Max. Temp.</th>
+                <th>Min Humi.</th>
+                <th>Max Humi.y</th> --}}
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

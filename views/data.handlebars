@@ -1,0 +1,27 @@
+<div class="container">
+<div class="card" style="padding: 15px">
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Device Id</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Door Lock</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{device_id}}</td>
+                <td>{{temperature}}</td>
+                <td>{{humidity}}</td>
+                <td>{{door_lock}}</td>
+                <td>{{date}}</td>
+
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+</div>

@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-img"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                </div>
+                                <form role="form" method="POST">
+                                    <div class="form-group">
+                                        <input type="email" name="email" class="form-control is-{{#if message }}invalid{{/if}} form-control-user" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                        {{#if message }}
+                                            <small class="text-danger">{{ message }}</small>
+                                        {{/if}}
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password" class="form-control is-{{#if pass_message }}invalid{{/if}} form-control-user" placeholder="Password">
+                                        {{#if pass_message }}
+                                            <small class="text-danger">{{ pass_message }}</small>
+                                        {{/if}}
+                                    </div>
+                                    <button class="btn btn-primary btn-user btn-block" type="submit"> Register </button>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="login">Already have an account? Login!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{{!-- <div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User Register</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" method="POST">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control is-{{#if message }}invalid{{/if}}" placeholder="E-mail" name="email" type="email" value="{{#if email }}{{ email }}{{/if}}" autofocus>
+                                {{#if message }}
+                                    <small class="text-danger">{{ message }}</small>
+                                {{/if}}
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control is-{{#if pass_message }}invalid{{/if}}" placeholder="Password" name="password" type="password"
+                                    value="">
+                                {{#if pass_message }}
+                                    <small class="text-danger">{{ pass_message }}</small>
+                                {{/if}}
+                            </div>
+                            <button class="btn btn-lg btn-success btn-block" type="submit">Register</button>
+                        </fieldset>
+                    </form>
+                    <br>
+                    <div>
+                        <small>Already Have an Account <a class="ml-2" href="login">Login</a> </small>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div> --}}

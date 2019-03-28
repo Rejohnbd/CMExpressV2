@@ -1,0 +1,190 @@
+#wrapper >ul,
+#content > .bg-black,
+.bg-black {
+  background: #1a1c22 !important;
+}
+
+#wrapper > #content-wrapper {
+  background-color: #252830 !important;
+  color: #cfd2da !important;
+}
+
+#sidebarToggle {
+  margin-bottom: 0 !important;
+  background-color: rgba(255,255,255,.8);
+}
+
+.sidebar-brand-text {
+  color: #fff;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+.sidebar-brand-text:hover {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bolder;
+}
+
+.topbar li{
+  margin-top: 20px;
+}
+
+.topbar li a{
+  color: #fff !important;
+}
+
+.text-light-white {
+  color: rgba(255,255,255,.8) !important;
+}
+
+.tex-white {
+  color: #fff !important;
+}
+
+
+#userNav {
+  border-radius: 0 !important;
+  background-color: #1a1c22 !important;
+  border: none;
+}
+.sidebar .nav-item .collapse .collapse-inner .collapse-item {
+  border-radius: 0 !important;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
+#userNav > .dropdown-item:hover {
+  background-color: #000 !important;
+  color : #fff !important;
+}
+
+.breadcrumb{
+  background-color: #1a1c22 !important;
+  border-radius: none !important;
+}
+
+.breadcrumb > .breadcrumb-item > a{
+  text-decoration: none !important;
+  color:  rgba(255,255,255,.8) !important;
+}
+
+.breadcrumb > .breadcrumb-item > a:hover{
+  color: #fff !important;
+}
+
+footer{
+  padding: 1rem 0 !important;
+}
+
+/* Common Style */
+#userDeviceList {
+  text-align: center !important;
+}
+
+/* #userDeviceList>tbody>tr>td{
+  padding-bottom: 0px !important;
+}*/
+.table td {
+  padding: 0px !important;
+}
+table.table td{
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+} 
+
+.text-white{
+  color: #fff;
+}
+
+.no-back{
+  background: transparent !important;
+}
+
+.bg-black{
+  background: #1a1c22 !important;
+}
+
+.bg-light-black {
+  background: #252830 !important;
+}
+
+.no-border{
+  border: none !important;
+}
+
+.white-border{
+  border: 1px solid #434857 !important;
+}
+
+
+input[type="search"],
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  background-color : #1a1c22 !important; 
+}
+
+
+/* Device List Table */
+#userDeviceList_paginate .page-link {
+  background-color: transparent !important;
+  color: #fff;
+}
+
+#userDeviceList_paginate .page-link:hover{
+  background-color: #fff !important;
+  color: #000;
+}
+
+.table {
+  color: #fff !important;
+}
+
+.table table.dataTable {
+  font-size: 15px;
+}
+
+/* Login Style */
+.bg-login-img,
+.bg-password-img,
+.bg-register-img{
+  background-image:url("../images/cmback.gif");
+  background-position:center;
+  background-size:cover
+}
+
+/* User Device List */
+/* .device-id{
+  color
+} */
+.user-device-list > li{
+  padding: .2rem 1.25rem !important; 
+} 
+
+
+/* Device Details */
+.deviceTemp,
+.deviceHumidity{
+  width: 100%;
+  height: 300px;
+  background: #252830 !important;
+}
+
+.temp-humi-edit {
+  padding: 0.75rem 0rem;
+}
+
+.temp-humi-edit > button {
+  color: #fff !important;
+}
+
+.temp-humi-edit > button:hover,
+.temp-humi-edit > button:focus,
+.temp-humi-edit > button:active{
+  border: none !important;
+}
+
+.thermometer .raphael-group-21-creditgroup {
+  display: none !important;
+} 

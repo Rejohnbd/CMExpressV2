@@ -1,0 +1,225 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Device Details</li>
+    </ol>
+</nav>
+{{data}}
+
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+        <li class="list-group-item active white-border bg-black text-center">TEMPERATURE</li>
+        <li class="list-group-item white-border bg-light-black text-center">
+            <div class="thermometer" id="tempCalcu" ></div>
+        </li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <ul class="list-group">
+        <li class="list-group-item active white-border bg-black text-center">HUMIDITY</li>
+        <li class="list-group-item white-border bg-light-black">
+            <div id="deviceTemp" class="deviceTemp"></div>
+        </li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <ul class="list-group">
+        <li class="list-group-item active white-border bg-black text-center">DOOR LOCK</li>
+        <li class="list-group-item white-border bg-light-black text-center">
+            <img class="img-fluid" src="/static/images/off.jpg">
+        </li>
+        </ul>
+    </div>
+</div>
+
+<div class="card mt-5 mb-5 white-border">
+    <div class="card-header bg-black text-center">
+        STATR UP
+    </div>
+    <div class="card-body bg-light-black">
+        <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white mb-3">
+                <div class="card-header bg-black text-center temp-humi-edit dropleft">
+                    Manimum Temperature
+                </div>
+                <div class="card-body bg-success">
+                    <h3 class="card-title">{{ data.tempareture_min }} <sup>o</sup>C</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white mb-3">
+                <div class="card-header bg-black text-center temp-humi-edit dropleft">
+                    Maximum Temperature
+                    <button class="float-right no-back no-border" data-toggle="tooltip" data-placement="top"
+                    title="Change Minimum Temp"><i class="far fa-edit"></i></button>
+                </div>
+                <div class="card-body bg-danger">
+                    <h3 class="card-title">{{ data.tempareture_max }} <sup>o</sup>C</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white mb-3">
+                <div class="card-header bg-black text-center temp-humi-edit dropleft">
+                    Manimum Humidity
+                    <button class="float-right no-back no-border" data-toggle="tooltip" data-placement="top"
+                    title="Change Minimum Temp"><i class="far fa-edit"></i></button>
+                </div>
+                <div class="card-body bg-success">
+                    <h3 class="card-title">{{ data.humidity_min }} <sup>o</sup>C</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white mb-3">
+                <div class="card-header bg-black text-center temp-humi-edit dropleft">
+                    Maximum Humidity
+                    <button class="float-right no-back no-border" data-toggle="tooltip" data-placement="top"
+                    title="Change Minimum Temp"><i class="far fa-edit"></i></button>
+                </div>
+                <div class="card-body bg-danger">
+                    <h3 class="card-title">{{ data.humidity_max }} <sup>o</sup>C</h3>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-5 mb-5 no-border">
+    <div class="card-header bg-black text-center">
+        Device Detail Informations
+    </div>
+    <div class="card-body bg-light-black">
+        <ul class="list-group white-border">
+        <li class="list-group-item no-back white-border" style="border-radius: 0 !important">Device Id : <span class="float-right">{{ data.device_id }}</span></li>
+        <li class="list-group-item no-back white-border">SIM Number : <span class="float-right">{{ data.sim_number }}</span></li>
+        <li class="list-group-item no-back white-border">Actived Date : <span class="float-right">{{ data.date }}</span></li>
+        <li class="list-group-item no-back white-border">Location : <span class="float-right">{{ data.location }}</span></li>
+        <li class="list-group-item no-back white-border" style="border-radius: 0 !important">Vestibulum at eros</li>
+        </ul>
+    </div>
+</div>
+
+
+ <script>
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    // create chart
+    var chart = am4core.create("deviceTemp", am4charts.GaugeChart);
+    chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+
+    chart.innerRadius = -25;
+
+    var axis = chart.xAxes.push(new am4charts.ValueAxis());
+    axis.min = 0;
+    axis.max = 100;
+    axis.strictMinMax = true;
+    axis.renderer.grid.template.stroke = new am4core.InterfaceColorSet().getFor("background");
+    axis.renderer.grid.template.strokeOpacity = 0.3;
+
+    var colorSet = new am4core.ColorSet();
+
+    var range0 = axis.axisRanges.create();
+    range0.value = 0;
+    range0.endValue = 50;
+    range0.axisFill.fillOpacity = 1;
+    range0.axisFill.fill = colorSet.getIndex(0);
+    range0.axisFill.zIndex = - 1;
+
+    var range1 = axis.axisRanges.create();
+    range1.value = 50;
+    range1.endValue = 80;
+    range1.axisFill.fillOpacity = 1;
+    range1.axisFill.fill = colorSet.getIndex(2);
+    range1.axisFill.zIndex = -1;
+
+    var range2 = axis.axisRanges.create();
+    range2.value = 80;
+    range2.endValue = 100;
+    range2.axisFill.fillOpacity = 1;
+    range2.axisFill.fill = colorSet.getIndex(4);
+    range2.axisFill.zIndex = -1;
+
+    var hand = chart.hands.push(new am4charts.ClockHand());
+
+    // using chart.setTimeout method as the timeout will be disposed together with a chart
+    chart.setTimeout(randomValue, 2000);
+
+    function randomValue() {
+      hand.showValue(Math.random() * 100, 1000, am4core.ease.cubicOut);
+      chart.setTimeout(randomValue, 2000);
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+      FusionCharts.ready(function () {
+        var chart = new FusionCharts({
+          type: 'thermometer',
+          renderAt: 'tempCalcu',
+          id: 'temp-monitor',
+          width: '150',
+          height: '300',
+          dataFormat: 'json',
+          dataSource: {
+            "chart": {
+              "theme": "fusion",
+              // "caption": "Central cold storage",
+              // "subcaption": "Bakersfield Central",
+              "subcaptionFontBold": "0",
+              "lowerLimit": "{{ data.tempareture_min }}",
+              "upperLimit": "{{ data.tempareture_max }}",
+              "numberSuffix": "°C",
+              "bgColor": "#ffffff",
+              "showBorder": "0",
+              "thmFillColor": "#008ee4"
+            },
+            "value": "0"
+          },
+          "events": {
+            "rendered": function (evtObj, argObj) {
+              var intervalVar = setInterval(function () {
+                var temp = 0 + parseInt(Math.floor(Math.random() * 6), 10);
+                FusionCharts.items["temp-monitor"].feedData("value=" + temp);
+              }, 3000);
+            }
+          }
+        })
+          .render();
+      });
+    })
+</script>
+
+{{!-- <script>
+    $("document").ready(function () {
+
+        function showStr(val) {
+            if (val == '1') {
+                return "On";
+            } else {
+                return "Off";
+            }
+        }
+
+        setInterval(function () {
+            $.each($('.temCal'), function (index, obj) {
+                $.ajax({
+                    url: 'http://localhost:5000/cm/' + obj.id + '/last_data',
+                    type: 'GET',
+                    success: function (data) {
+                        if (data) {
+                            var device_id = data.device_id
+                            $('#' + device_id).html('<p>Temparature : ' + data.temperature + '</p><p>Humidity : ' + data.humidity + '</p><p>Door Lock : ' + showStr(data.door_lock) + '</p>')
+                        }
+                    }
+                });
+            })
+        }, 3000);
+    });
+</script> --}}
