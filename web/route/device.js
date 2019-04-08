@@ -3,12 +3,13 @@ const router = express.Router()
 const Device = require('../../api/model/device')
 const CMData = require('../../api/model/cmdata')
 const mongoose = require('mongoose')
+const check_session = require('../../api/middleware/check_session')
 
-router.get('/add_device', (req, res) => {
-    return res.render('device_add')
+router.get('/add_device',check_session, (req, res) => {
+    return res.render('device_add', {sess: sess })
 })
 
-router.post('/save', (req, res) => {
+router.post('/save',check_session, (req, res) => {
     Device.findOne({ device_id: req.body.device_id })
         .exec()
         .then(device => {
@@ -28,23 +29,27 @@ router.post('/save', (req, res) => {
         })
 })
 
-router.get('/', (req, res) => {
+router.get('/',check_session, (req, res) => {
     Device.find()
-        .exec()
-        .then(docs => {
-            return res.render('device_list', { datas: docs })
+    .exec()
+    .then(docs => {
+        return res.render('device_list', { 
+            datas: docs,
+            sess: sess 
         })
-        .catch(err => {
-            return res.status(500).json({
-                error: err
-            })
+    })
+    .catch(err => {
+        return res.status(500).json({
+            error: err
         })
+    })
+    
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id',check_session, (req, res) => {
     Device.findOne({ _id: req.params.id })
         .then(doc => {
-            return res.render('device_add', { data: doc })
+            return res.render('device_add', { data: doc, sess: sess })
         })
         .catch(err => {
 
@@ -52,12 +57,12 @@ router.get('/:id', (req, res) => {
 })
 
 
-router.get('/view_device/:id', (req, res) => {
+router.get('/view_device/:id', check_session, (req, res) => {
     
     Device.findOne({ _id: req.params.id })
         .populate('devices')
         .then(doc => {
-            return res.render('view_device', { data: doc })
+            return res.render('view_device', { data: doc, sess: sess })
         })
         .catch(err => {
 

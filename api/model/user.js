@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema({
     },
     password: { type: String, required: true },
     name: {type:String},
-    is_admin: {type: Boolean},
+    is_admin: {type: Boolean, default: false},
     phone:{type:String},
     address:{type:String},
     image:{type:String},

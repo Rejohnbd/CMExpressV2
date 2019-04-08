@@ -8,20 +8,22 @@ const CMData = require('../model/cmdata')
 
 
 router.get('/', (req, res) => {
-    console.log(req.session.email)
-    console.log(req.session.id)
-    console.log(req.session.admin)
-    if (!req.session.email) {
+    sess = req.session
+    console.log(sess)
+    // console.log(req.session.email)
+    // console.log(req.session.id)
+    // console.log(req.session.admin)
+    if (!sess.email) {
         //res.setHeader("Content-Type", "text/html")
         return res.redirect('login')
     }
     
     return res.render('main', {
-        isadmin: req.session.admin,
-        username: req.session.name,
-        userimage: req.session.image
-
-    } )
+        // isadmin: req.session.admin,
+        // username: req.session.name,
+        // userimage: req.session.image
+        sess: req.session
+    })
 })
 
 router.get('/logout', (req, res) => {
@@ -51,12 +53,13 @@ router.post('/login', (req, res) => {
                     if (result) {
                         console.log('Success Bcrypt')
                         console.log(user)
+                        console.log(user._id)
                         req.session.email = user.email
-                        req.session.id = user._id
+                        req.session.userid = user._id
                         req.session.admin = user.is_admin
                         req.session.name = user.name
                         req.session.image = user.image
-
+                        sess = req.session
                         return res.redirect('/')
 
                         // return res.status(201).json({

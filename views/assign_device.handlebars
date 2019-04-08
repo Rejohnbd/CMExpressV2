@@ -1,35 +1,25 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Unassigned Device</li>
+        <li class="breadcrumb-item active" aria-current="page">Assigned Device</li>
     </ol>
 </nav>
 
-    
-
-
-    <table class="table table-striped">
-
-        <thead>
-            <tr>
-                <th>Device Id</th>
-                <th>Sim Number</th>
-                <th>Action</th>
-            </tr>
-
-        </thead>
-        <tbody>
-            {{#each devices  }}
-            <tr>
-                <td>{{ device_id }} </td>
-                <td>{{ sim_number }} </td>
-                <td><a href="/webuser/assign/{{ _id }}/{{ ../user_id }}" class="btn btn-primary">Assign</a></td>
-            </tr>
-
-            {{/each }}
-        </tbody>
-        
-
-    </table>
-    
-    
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Device Id</th>
+            <th>Sim Number</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each devices  }}
+        <tr>
+            <td>{{ device_id }} </td>
+            <td>{{ sim_number }} </td>
+            <td><a href="/webuser/assign/{{ _id }}/{{ ../user_id }}" class="btn btn-sm btn-primary">Assign</a></td>
+        </tr>
+        {{/each }}
+    </tbody>
+</table>
