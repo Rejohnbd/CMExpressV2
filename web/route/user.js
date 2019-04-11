@@ -121,18 +121,19 @@ router.get('/unassign/:device_id/:user_id', (req, res) => {
 
 
 // USER INFORMATION
-router.get('/userdevice/:id', check_session, (req, res) => {
+
+router.get('/devicedetail/:id', check_session, (req, res) => {
+    
     User.findOne({ _id: req.params.id })
     .populate('devices')
     .exec()
     .then(doc => {
-        return res.render('user_device_list', { data: doc.devices, sess: sess })
+        return res.render('view_user', { data: doc, sess: sess })
     })
     .catch(err => {
 
     })
 })
-
 
 
 module.exports = router

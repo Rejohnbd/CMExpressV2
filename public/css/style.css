@@ -120,9 +120,11 @@ table.table td{
 input[type="search"],
 input[type="text"],
 input[type="number"],
+input[type="file"],
 select,
 textarea {
   background-color : #1a1c22 !important; 
+  border-radius: 0px !important;
 }
 
 
@@ -188,3 +190,27 @@ textarea {
 .thermometer .raphael-group-21-creditgroup {
   display: none !important;
 } 
+
+/* User Profile */
+#userImageUploadAddon{
+  width: 100% !important;
+  border-radius: 0px !important;
+  background-color: #1a1c22 !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+.custom-file-label{
+  background-color: #1a1c22 !important;
+  border-radius: 0px !important;
+}
+
+.custom-file-label::after{
+  background-color: #4285F4 !important;
+  border-radius: 0px !important;
+  color: #fff;
+}
+
+.custom-file:hover{
+  cursor: pointer !important;
+}

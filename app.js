@@ -5,6 +5,9 @@ const morgan = require('morgan');
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const session = require('express-session')
+
+const fileUpload = require('express-fileupload')
+
 // const questionRoute = require('./api/route/question');
 const cmDataRoute = require('./api/route/cmdata')
 const userRoute = require('./api/route/user')
@@ -18,6 +21,7 @@ const dataRoute = require('./api/route/data')
 /*===========Web Route===========*/
 const userWebRoute = require('./web/route/user')
 const deviceWebRoute = require('./web/route/device')
+const clientRoute = require('./web/route/clients')
 
 const app = express();
 mongoose.connect(process.env.DB_URL,{ useCreateIndex: true,useNewUrlParser: true });
@@ -83,6 +87,12 @@ app.use('/cm',cmDataRoute);
 /*===========Web Route===========*/
 app.use('/webuser', userWebRoute)
 app.use('/webdevice', deviceWebRoute)
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}))
+
+app.use('/client', clientRoute)
 
 
 

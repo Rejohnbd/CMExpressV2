@@ -6,34 +6,36 @@ const bcrypt = require('bcryptjs')
 const CMData = require('../model/cmdata')
 
 
-
 router.get('/', (req, res) => {
     sess = req.session
     console.log(sess)
-    // console.log(req.session.email)
-    // console.log(req.session.id)
-    // console.log(req.session.admin)
     if (!sess.email) {
         //res.setHeader("Content-Type", "text/html")
         return res.redirect('login')
+    }else{
+        if(sess.admin == true){
+            return res.render('main', {
+                sess: req.session
+            })
+        }else{
+            return res.render('client', {
+                sess: req.session
+            })
+        }
     }
-    
-    return res.render('main', {
-        // isadmin: req.session.admin,
-        // username: req.session.name,
-        // userimage: req.session.image
-        sess: req.session
-    })
 })
+
 
 router.get('/logout', (req, res) => {
     req.session.destroy()
     return res.redirect('login')
 })
 
+
 router.get('/login', (req, res) => {
     return res.render('login', {nav:true})
 })
+
 
 router.post('/login', (req, res) => {
     User.findOne({ email: req.body.email })

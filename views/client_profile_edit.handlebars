@@ -1,0 +1,84 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">User Profile Edit</li>
+    </ol>
+</nav>
+
+<div class="card mb-3">
+    <div class="card-header bg-black">
+        <h3>Edit User Profile</h3>
+    </div>
+    <div class="card-body bg-light-black">
+
+         <form role="form" action="/client/profile_update" method="POST" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputUserId">Add User Name</label>
+                    <input type="hidden" class="form-control" name="_id" value="{{ data._id}}" required >
+                    <input type="text" class="form-control" id="inputUserId" name="name" placeholder="Enter Your Name" value="" required>
+                    {{!-- <input type="text" class="form-control" id="inputDeviceId" name="device_id" placeholder="Enter Device Id" value="{{#if data }}{{ data.device_id }}{{/if}}" required> --}}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputUserEmail">User Email</label>
+                    {{!-- <input type="text" class="form-control" id="inputSimNumber" name="sim_number" placeholder="Enter SIM Number" value="{{#if data }}{{ data.sim_number }}{{/if}}" required> --}}
+                    <input type="text" class="form-control" id="inputUserEmail" name="email"  value="{{#if data }}{{ data.email }}{{/if}}" disabled required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputUserPhone">User Phone</label>
+                    {{!-- <input type="number" id="inputMinTemp" class="form-control" name="tempareture_min" placeholder="Enter Minimum Temperature" value="{{#if data }}{{ data.tempareture_min }}{{/if}}"> --}}
+                    <input type="number" id="inputUserPhone" class="form-control" name="phone" placeholder="Enter User Phone" value="" min="0" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputUserAddress">User Address</label>
+                {{!-- <textarea id="inputUserAddress" class="form-control" rows="3" name="address" placeholder="User Address">{{#if data }}{{ data.location }}{{/if}}</textarea> --}}
+                <textarea id="inputUserAddress" class="form-control" rows="3" name="address" placeholder="User Address">{{#if data }}{{ data.location }}{{/if}}</textarea>
+            </div>
+            {{!-- <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputMinHumi">Minimum Humidity</label>
+                    <input type="number" id="inputMinHumi" class="form-control" name="humidity_min" placeholder="Enter Minimum Humidity" value="{{#if data }}{{ data.humidity_min }}{{/if}}" min="1">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputMaxHumi">Maximum Humidity</label>
+                    <input type="number" class="form-control" id="inputMaxHumi" name="humidity_max" placeholder="Enter Minimum Humidity" value="{{#if data }}{{ data.humidity_max }}{{/if}}" min="1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputLocation">Location</label>
+                <textarea id="inputLocation" class="form-control" rows="3" name="location" placeholder="Location">{{#if data }}{{ data.location }}{{/if}}</textarea>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="isAssigned" name="is_assign" {{#if data.is_assign }}checked{{/if }} value="true">
+                <label class="form-check-label" for="isAssigned">
+                    Is Assigned
+                </label>
+            </div> --}}
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="userImageUploadAddon">Profile Image</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-10">
+                    <div class="custom-file">
+                        <input type="file" name="image" accept="image/x-png,image/jpeg" class="custom-file-input" id="userImageUpload" aria-describedby="userImageUploadAddon">
+                        <label for="userImageUpload" class="custom-file-label">Choose file</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-block">Update User</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="reset" class="btn btn-block btn-warning">Reset User</button>
+                </div>
+            </div> 
+        </form>          
+    </div>
+</div>

@@ -1,0 +1,177 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">All Device</li>
+    </ol>
+</nav>
+
+<div class="card mt-5 mb-5 white-border">
+    <div class="card-header bg-black text-center">
+        ALL DEVICES
+    </div>
+    <div class="card-body bg-light-black">
+        {{#each data}}
+        <h6 class="text-center">DEVICE ID: <a href="/client/view_device/{{ _id }}">{{ device_id }}</a></h6>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item active white-border bg-black text-center">TEMPERATURE</li>
+                    <li class="list-group-item white-border bg-light-black text-center">
+                        <div id="chart-container"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item active white-border bg-black text-center">HUMIDITY</li>
+                    <li class="list-group-item white-border bg-light-black text-center">
+                        <div id="deviceTemp" class="deviceTemp"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item active white-border bg-black text-center">DOOR</li>
+                    <li class="list-group-item white-border bg-light-black text-center">
+                        <img class="img-fluid" src="/static/images/on.jpg">
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {{/each }}
+
+    </div>
+</div>
+
+
+<script>
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    // create chart
+    var chart = am4core.create("deviceTemp", am4charts.GaugeChart);
+    chart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+
+    chart.innerRadius = -25;
+
+    var axis = chart.xAxes.push(new am4charts.ValueAxis());
+    axis.min = 0;
+    axis.max = 100;
+    axis.strictMinMax = true;
+    axis.renderer.grid.template.stroke = new am4core.InterfaceColorSet().getFor("background");
+    axis.renderer.grid.template.strokeOpacity = 0.3;
+
+    var colorSet = new am4core.ColorSet();
+
+    var range0 = axis.axisRanges.create();
+    range0.value = 0;
+    range0.endValue = 50;
+    range0.axisFill.fillOpacity = 1;
+    range0.axisFill.fill = colorSet.getIndex(0);
+    range0.axisFill.zIndex = - 1;
+
+    var range1 = axis.axisRanges.create();
+    range1.value = 50;
+    range1.endValue = 80;
+    range1.axisFill.fillOpacity = 1;
+    range1.axisFill.fill = colorSet.getIndex(2);
+    range1.axisFill.zIndex = -1;
+
+    var range2 = axis.axisRanges.create();
+    range2.value = 80;
+    range2.endValue = 100;
+    range2.axisFill.fillOpacity = 1;
+    range2.axisFill.fill = colorSet.getIndex(4);
+    range2.axisFill.zIndex = -1;
+
+    var hand = chart.hands.push(new am4charts.ClockHand());
+
+    // using chart.setTimeout method as the timeout will be disposed together with a chart
+    chart.setTimeout(randomValue, 2000);
+
+    function randomValue() {
+      hand.showValue(Math.random() * 100, 1000, am4core.ease.cubicOut);
+      chart.setTimeout(randomValue, 2000);
+    }
+</script>
+
+  <script>
+    $(document).ready(function () {
+      FusionCharts.ready(function () {
+        var chart = new FusionCharts({
+          type: 'thermometer',
+          renderAt: 'chart-container',
+          id: 'temp-monitor',
+          width: '120',
+          height: '400',
+          dataFormat: 'json',
+          dataSource: {
+            "chart": {
+              "theme": "fusion",
+              "caption": "",
+              "subcaption": "",
+              "subcaptionFontBold": "0",
+              "lowerLimit": "-20",
+              "upperLimit": "20",
+              "numberSuffix": "°C",
+              "bgColor": "#ffffff",
+              "showBorder": "0",
+              "thmFillColor": "#008ee4"
+            },
+            "value": "-10"
+          },
+          "events": {
+            "rendered": function (evtObj, argObj) {
+              var intervalVar = setInterval(function () {
+                var temp = -10 + parseInt(Math.floor(Math.random() * 6), 10);
+                FusionCharts.items["temp-monitor"].feedData("value=" + temp);
+              }, 3000);
+            }
+          }
+        })
+          .render();
+      });
+    })
+
+  </script>
+
+<script>
+    $(document).ready(function () {
+      FusionCharts.ready(function () {
+        var chart = new FusionCharts({
+          type: 'thermometer',
+          renderAt: 'chart-container2',
+          id: 'temp-monitor',
+          width: '120',
+          height: '400',
+          dataFormat: 'json',
+          dataSource: {
+            "chart": {
+              "theme": "fusion",
+              "caption": "",
+              "subcaption": "",
+              "subcaptionFontBold": "0",
+              "lowerLimit": "-20",
+              "upperLimit": "20",
+              "numberSuffix": "°C",
+              "bgColor": "#ffffff",
+              "showBorder": "0",
+              "thmFillColor": "#008ee4"
+            },
+            "value": "-10"
+          },
+          "events": {
+            "rendered": function (evtObj, argObj) {
+              var intervalVar = setInterval(function () {
+                var temp = -10 + parseInt(Math.floor(Math.random() * 6), 10);
+                FusionCharts.items["temp-monitor"].feedData("value=" + temp);
+              }, 3000);
+            }
+          }
+        })
+          .render();
+      });
+    })
+
+  </script>
