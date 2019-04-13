@@ -16,26 +16,22 @@
                 <div class="form-group col-md-6">
                     <label for="inputUserId">Add User Name</label>
                     <input type="hidden" class="form-control" name="_id" value="{{ data._id}}" required >
-                    <input type="text" class="form-control" id="inputUserId" name="name" placeholder="Enter Your Name" value="" required>
-                    {{!-- <input type="text" class="form-control" id="inputDeviceId" name="device_id" placeholder="Enter Device Id" value="{{#if data }}{{ data.device_id }}{{/if}}" required> --}}
+                    <input type="text" class="form-control" id="inputUserId" name="name" placeholder="Enter Your Name" value="{{#if data }}{{ data.name }}{{/if}}" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputUserEmail">User Email</label>
-                    {{!-- <input type="text" class="form-control" id="inputSimNumber" name="sim_number" placeholder="Enter SIM Number" value="{{#if data }}{{ data.sim_number }}{{/if}}" required> --}}
                     <input type="text" class="form-control" id="inputUserEmail" name="email"  value="{{#if data }}{{ data.email }}{{/if}}" disabled required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputUserPhone">User Phone</label>
-                    {{!-- <input type="number" id="inputMinTemp" class="form-control" name="tempareture_min" placeholder="Enter Minimum Temperature" value="{{#if data }}{{ data.tempareture_min }}{{/if}}"> --}}
-                    <input type="number" id="inputUserPhone" class="form-control" name="phone" placeholder="Enter User Phone" value="" min="0" required>
+                    <input type="number" id="inputUserPhone" class="form-control" name="phone" placeholder="Enter User Phone" value="{{#if data }}{{ data.phone }}{{/if}}" min="0" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputUserAddress">User Address</label>
-                {{!-- <textarea id="inputUserAddress" class="form-control" rows="3" name="address" placeholder="User Address">{{#if data }}{{ data.location }}{{/if}}</textarea> --}}
-                <textarea id="inputUserAddress" class="form-control" rows="3" name="address" placeholder="User Address">{{#if data }}{{ data.location }}{{/if}}</textarea>
+                <textarea id="inputUserAddress" class="form-control" rows="3" name="address" placeholder="User Address">{{#if data }}{{ data.address }}{{/if}}</textarea>
             </div>
             {{!-- <div class="form-row">
                 <div class="form-group col-md-6">

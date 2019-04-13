@@ -9,7 +9,11 @@
     <div class="row">
         <div class="col-md-3">
             <div class="p-2">
+                {{#if data.image }}
+                <img class="img-fluid img-thumbnail" src="/static/{{data.image}}" width="200" height="400">
+                {{else}}
                 <img class="img-fluid img-thumbnail" src="/static/default.png" width="200" height="400">
+                {{/if}}
             </div>
         </div>
         <div class="col-md-9">
@@ -18,11 +22,15 @@
                     <h4>{{ data.name }}</h4>
                 {{/if}}
                 <p class="mb-0"><i class="fas fa-envelope"></i> {{ data.email }}</p>
-                <p class="mb-0"><i class="fas fa-phone-square"></i> </p>
-                <p class="mb-0"><i class="fas fa-map-marker-alt"></i> </p>
-                <p class="mb-0"><i class="fas fa-hdd"></i>
+                {{#if data.phone }}
+                <p class="mb-0"><i class="fas fa-phone-square"></i> {{ data.phone }} </p>
+                {{/if}}
+                {{#if data.address }}
+                <p class="mb-0"><i class="fas fa-map-marker-alt"></i> {{ data.address }}</p>
+                {{/if}}
+                {{!-- <p class="mb-0"><i class="fas fa-hdd"></i>
                     2 Device Assigned
-                </p>
+                </p> --}}
             </div>
             <div class="float-right p-2">
                 <a href="/client/profile_edit/{{ sess.userid }}" class="btn btn-success btn-circle" title="Edit Profile">

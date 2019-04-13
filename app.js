@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const session = require('express-session')
 
-const fileUpload = require('express-fileupload')
+//const fileUpload = require('express-fileupload')
 
 // const questionRoute = require('./api/route/question');
 const cmDataRoute = require('./api/route/cmdata')
@@ -87,10 +87,10 @@ app.use('/cm',cmDataRoute);
 /*===========Web Route===========*/
 app.use('/webuser', userWebRoute)
 app.use('/webdevice', deviceWebRoute)
-app.use(fileUpload({
-    useTempFiles : true,
-    tempFileDir : '/tmp/'
-}))
+// app.use(fileUpload({
+//     useTempFiles : true,
+//     tempFileDir : '/tmp/'
+// }))
 
 app.use('/client', clientRoute)
 
