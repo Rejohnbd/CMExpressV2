@@ -23,8 +23,8 @@
             </a>
             <div id="userDeviceInfo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="py-2 collapse-inner rounded">
-                    <a class="collapse-item text-light-white" href="/webdevice">Device List</a>
-                    <a class="collapse-item text-light-white" href="/webdevice/add_device">Add Device</a>
+                    <a class="collapse-item text-light-white" href="/admin/devicelist">Device List</a>
+                    <a class="collapse-item text-light-white" href="/admin/add_device">Add Device</a>
                 </div>
             </div>
         </li>
@@ -36,8 +36,7 @@
             </a>
             <div id="userInfo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="py-2 collapse-inner rounded">
-                    <a class="collapse-item text-light-white" href="/webuser">User List</a>
-                    {{!-- <a class="collapse-item text-light-white" href="/webdevice/add_device">Add Device</a> --}}
+                    <a class="collapse-item text-light-white" href="/admin/users">User List</a>
                 </div>
             </div>
         </li>
@@ -52,7 +51,7 @@
             </a>
             <div id="collapseDevice" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="py-2 collapse-inner rounded">
-                    <a class="collapse-item text-light-white" href="/client/devices/{{ sess.userid }}">Device List</a>
+                    <a class="collapse-item text-light-white" href="/client/{{ sess.userid }}/devices">Device List</a>
                     <a class="collapse-item text-light-white" href="/client/alldevics/{{ sess.userid }}">All Devices</a>
                 </div>
             </div>

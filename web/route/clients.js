@@ -7,7 +7,7 @@ const check_session = require('../../api/middleware/check_session')
 const multer = require('multer')
 
 
-router.get('/devices/:id', check_session, (req, res) => {
+router.get('/:id/devices', check_session, (req, res) => {
     User.findOne({ _id: req.params.id })
     .populate('devices')
     .exec()
@@ -46,6 +46,8 @@ router.get('/alldevics/:id', check_session, (req, res) => {
 })
 
 
+
+//Profile Section
 router.get('/profile/:id', check_session, (req, res) => {
     
     User.findOne({ _id: req.params.id})
@@ -162,6 +164,8 @@ router.post('/profile_update', check_session, upload.single('image'),(req, res) 
 
                 user.save()
                     .then(user => {
+                        req.session.name = user.name
+                        sess = req.session
                         return res.render('client_profile', { data: user, sess: sess })
                     })
                     .catch(err => {

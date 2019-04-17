@@ -5,11 +5,11 @@ const CMData = require('../../api/model/cmdata')
 const mongoose = require('mongoose')
 const check_session = require('../../api/middleware/check_session')
 
-router.get('/add_device',check_session, (req, res) => {
+/*router.get('/add_device',check_session, (req, res) => {
     return res.render('device_add', {sess: sess })
-})
+})*/
 
-router.post('/save',check_session, (req, res) => {
+/*router.post('/save',check_session, (req, res) => {
     Device.findOne({ device_id: req.body.device_id })
         .exec()
         .then(device => {
@@ -27,9 +27,9 @@ router.post('/save',check_session, (req, res) => {
         .catch(err => {
 
         })
-})
+})*/
 
-router.get('/',check_session, (req, res) => {
+/*router.get('/',check_session, (req, res) => {
     Device.find()
     .exec()
     .then(docs => {
@@ -44,9 +44,9 @@ router.get('/',check_session, (req, res) => {
         })
     })
     
-})
+})*/
 
-router.get('/:id',check_session, (req, res) => {
+/*router.get('/:id',check_session, (req, res) => {
     Device.findOne({ _id: req.params.id })
         .then(doc => {
             return res.render('device_add', { data: doc, sess: sess })
@@ -54,10 +54,10 @@ router.get('/:id',check_session, (req, res) => {
         .catch(err => {
 
         })
-})
+})*/
 
 
-router.get('/view_device/:id', check_session, (req, res) => {
+/*router.get('/view_device/:id', check_session, (req, res) => {
     
     Device.findOne({ _id: req.params.id })
         .populate('devices')
@@ -67,9 +67,9 @@ router.get('/view_device/:id', check_session, (req, res) => {
         .catch(err => {
 
         })
-})
+})*/
 
-router.post('/update', (req, res) => {
+/*router.post('/update', (req, res) => {
     Device.findOneAndUpdate(
         { _id: req.body._id },
         { $set: {
@@ -90,7 +90,7 @@ router.post('/update', (req, res) => {
         .catch(err => {
             
         })
-})
+})*/
 
 router.get('/unassigned/:id', (req, res) => {
     Device.updateOne(
@@ -118,7 +118,7 @@ router.get('/assigned/:id', (req, res) => {
         })
 })
 
-router.get('/delete/:id', (req, res) => {
+/*router.get('/delete/:id', (req, res) => {
     Device.deleteOne(
         { _id: req.params.id }
     )
@@ -128,7 +128,7 @@ router.get('/delete/:id', (req, res) => {
         .catch(err => {
 
         })
-})
+})*/
 
 
 module.exports = router

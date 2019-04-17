@@ -22,6 +22,7 @@ const dataRoute = require('./api/route/data')
 const userWebRoute = require('./web/route/user')
 const deviceWebRoute = require('./web/route/device')
 const clientRoute = require('./web/route/clients')
+const adminRoute = require('./web/route/admin')
 
 const app = express();
 mongoose.connect(process.env.DB_URL,{ useCreateIndex: true,useNewUrlParser: true });
@@ -85,14 +86,11 @@ app.use('/cm',cmDataRoute);
 //app.use('/add_device',addDeviceRoute);
 
 /*===========Web Route===========*/
-app.use('/webuser', userWebRoute)
-app.use('/webdevice', deviceWebRoute)
-// app.use(fileUpload({
-//     useTempFiles : true,
-//     tempFileDir : '/tmp/'
-// }))
+//app.use('/webuser', userWebRoute)
+//app.use('/webdevice', deviceWebRoute)
 
 app.use('/client', clientRoute)
+app.use('/admin', adminRoute)
 
 
 

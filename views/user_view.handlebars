@@ -1,0 +1,120 @@
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">User Details</li>
+    </ol>
+</nav>
+
+<div class="card bg-black white-border">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="p-2">
+                {{#if data.image }}
+                <img class="img-fluid img-thumbnail" src="/static/{{data.image}}" width="200" height="400">
+                {{else}}
+                <img class="img-fluid img-thumbnail" src="/static/default.png" width="200" height="400">
+                {{/if}}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="p-2">
+                <h4>{{ data.name }}</h4>
+                <p class="mb-0"><i class="fas fa-envelope"></i> {{ data.email }}</p>
+                <p class="mb-0"><i class="fas fa-phone-square"></i> {{ data.phone }}</p>
+                <p class="mb-0"><i class="fas fa-map-marker-alt"></i> {{ data.address }}</p>
+                <p class="mb-0"><i class="fas fa-hdd"></i>
+                    {{#if data.devices.length }}
+                    {{ data.devices.length }} Device Assigned
+                    {{else }}
+                    NoDevice Assigned
+                    {{/if}}
+                </p>
+                {{data._id}}
+            </div>
+            <div class="float-right p-2">
+                <a href="/admin/assigndevice/{{ data._id }}" class="btn btn-success btn-circle" title="Assign Device">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-5 mb-5 no-border">
+    <div class="card-header bg-black text-center">
+        Device Uses By {{ data.name }}
+    </div>
+    <div class="p-2 bg-light-black">
+        <div class="row bg-light-black ">
+        {{#each data.devices }}
+        <div class="col-md-6" >
+            <div class="card mt-2 mb-2 bg-light-black temCal" id="{{ device_id }}">
+                <ul class="list-group white-border user-device-list">
+                    <li class="list-group-item no-back white-border" style="border-radius: 0 !important">Device Id : <span class="float-right"><a href="/admin/view_device/{{ _id }}">{{ device_id }}</a></span></li>
+                    <li class="list-group-item no-back white-border">SIM Number : <span class="float-right">{{ sim_number }}</span></li>
+                    <li class="list-group-item no-back white-border">Actived Date : <span class="float-right">23-06-2018</span></li>
+                    <li class="list-group-item no-back white-border">Location: <span class="float-right">{{ location }}</span></li>
+                    <li class="list-group-item no-back white-border lock-door" style="border-radius: 0 !important"></li>
+                </ul>
+                <div class="row mt-2 pl-2 pr-2">
+                    <div class="col-md-6">
+                    <div class="card text-white mb-3">
+                        <div class="card-header bg-black text-center temp-humi-edit dropleft">
+                            Temperature
+                        </div>
+                        <div class="card-body bg-success">
+                            <h3 class="temp-title card-title"></h3>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="card text-white mb-3">
+                        <div class="card-header bg-black text-center temp-humi-edit dropleft">
+                            Humidity
+                        </div>
+                        <div class="card-body bg-warning">
+                            <h3 class="card-title"></h3>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <a href="/admin/unassign/{{ _id }}/{{../data._id}}" class="btn btn-block btn-danger btn-sm">Unassign Device</a>
+            </div>
+        </div>          
+        {{/each }}
+    </div>
+    </div>
+    
+</div>
+
+<script>
+    $("document").ready(function () {
+
+        function showStr(val) {
+            if (val == '1') {
+                return "On";
+            } else {
+                return "Off";
+            }
+        }
+
+        setInterval(function () {
+            $.each($('.temCal'), function (index, obj) {
+                console.log(obj.id)
+                $.ajax({
+                    url: 'http://localhost:5000/cm/' + obj.id + '/last_data',
+                    type: 'GET',
+                    success: function (data) {
+                        if (data) {
+                            var device_id = data.device_id
+                            $('#' + device_id + '>ul>li:last' ).html('Door Lock: <span class="float-right">'+ showStr(data.door_lock) +'</span>');
+                            $('#' + device_id).find('h3:first').html(data.temperature +' <sup>o</sup>C');
+                            $('#' + device_id).find('h3:last').html(data.humidity +' <sup>o</sup>C');
+                        }
+                    }
+                });
+            })
+        }, 3000);
+    });
+</script>

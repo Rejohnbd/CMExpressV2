@@ -1,0 +1,42 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+    </ol>
+</nav>
+
+<div class="card bg-black white-border">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="p-2">
+                {{#if data.image }}
+                <img class="img-fluid img-thumbnail" src="/static/{{data.image}}" width="200" height="400">
+                {{else}}
+                <img class="img-fluid img-thumbnail" src="/static/default.png" width="200" height="400">
+                {{/if}}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="p-2">
+                {{#if data.name }}
+                    <h4>{{ data.name }}</h4>
+                {{/if}}
+                <p class="mb-0"><i class="fas fa-envelope"></i> {{ data.email }}</p>
+                {{#if data.phone }}
+                <p class="mb-0"><i class="fas fa-phone-square"></i> {{ data.phone }} </p>
+                {{/if}}
+                {{#if data.address }}
+                <p class="mb-0"><i class="fas fa-map-marker-alt"></i> {{ data.address }}</p>
+                {{/if}}
+                {{!-- <p class="mb-0"><i class="fas fa-hdd"></i>
+                    2 Device Assigned
+                </p> --}}
+            </div>
+            <div class="float-right p-2">
+                <a href="/admin/profile_edit/{{ sess.userid }}" class="btn btn-success btn-circle" title="Edit Profile">
+                    <i class="fas fa-edit"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

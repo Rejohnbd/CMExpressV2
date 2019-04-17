@@ -5,7 +5,7 @@ const Device = require('../../api/model/device')
 const check_session = require('../../api/middleware/check_session')
 
 
-router.get('/', check_session, (req, res) => {
+/*router.get('/', check_session, (req, res) => {
     User.find()
         .exec()
         .then(users => {
@@ -16,9 +16,9 @@ router.get('/', check_session, (req, res) => {
                 error: err
             })
         })
-})
+})*/
 
-router.get('/:id', check_session, (req, res) => {
+/*router.get('/:id', check_session, (req, res) => {
     
     User.findOne({ _id: req.params.id })
     .populate('devices')
@@ -29,11 +29,11 @@ router.get('/:id', check_session, (req, res) => {
     .catch(err => {
 
     })
-})
+})*/
 
 
 
-router.get('/assigndevice/:id', check_session, (req, res) => {
+/*router.get('/assigndevice/:id', check_session, (req, res) => {
     user_id = req.params.id 
     Device.find({ is_assign: false })
         .exec()
@@ -43,9 +43,9 @@ router.get('/assigndevice/:id', check_session, (req, res) => {
         })
         .catch()
     // return res.send('HHHHHH')
-})
+})*/
 
-router.get('/assign/:device_id/:user_id', (req, res) => {
+/*router.get('/assign/:device_id/:user_id', (req, res) => {
     // console.log("HHHHHHHHH")
     // return res.send("YYYYYYYYYYY")
 
@@ -80,7 +80,7 @@ router.get('/assign/:device_id/:user_id', (req, res) => {
             })
         })
     // return res.send('HHHHHH')
-})
+})*/
 
 router.get('/unassign/:device_id/:user_id', (req, res) => {
     // console.log("HHHHHHHHH")
@@ -120,7 +120,7 @@ router.get('/unassign/:device_id/:user_id', (req, res) => {
 })
 
 
-// USER INFORMATION
+
 
 router.get('/devicedetail/:id', check_session, (req, res) => {
     

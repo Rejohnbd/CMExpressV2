@@ -4,7 +4,6 @@
         <li class="breadcrumb-item active" aria-current="page">Assigned Device</li>
     </ol>
 </nav>
-
 <table class="table table-striped">
     <thead>
         <tr>
@@ -18,7 +17,7 @@
         <tr>
             <td>{{ device_id }} </td>
             <td>{{ sim_number }} </td>
-            <td><a href="/webuser/assign/{{ _id }}/{{ ../user_id }}" class="btn btn-sm btn-primary">Assign</a></td>
+            <td><a href="/admin/assign/{{ _id }}/{{ ../user_id }}" class="btn btn-sm btn-primary">Assign</a></td>
         </tr>
         {{/each }}
     </tbody>

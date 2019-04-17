@@ -2,21 +2,57 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose')
 const User = require('../model/user')
+const Devices = require('../model/device')
 const bcrypt = require('bcryptjs')
 const CMData = require('../model/cmdata')
 
 
 router.get('/', (req, res) => {
     sess = req.session
-    console.log(sess)
+    //console.log(sess)
     if (!sess.email) {
         //res.setHeader("Content-Type", "text/html")
         return res.redirect('login')
     }else{
         if(sess.admin == true){
-            return res.render('main', {
-                sess: req.session
-            })
+            User.find()
+                .exec()
+                .then(users => {
+                    Devices.find()
+                        .exec()
+                        .then(devices => {
+
+                            assign_count =0;
+                            unassign_count =0;
+                            devices.map(device=>{
+                                if(device.is_assign==true){
+                                    assign_count = assign_count + 1
+                                }else{
+                                    unassign_count = unassign_count + 1
+                                }
+                            })
+                            total_count = unassign_count+assign_count
+    
+                            return res.render('main', {
+                                no_of_users:users.length,
+                                sess: req.session,
+                                total_count:total_count,
+                                assign_count:assign_count,
+                                unassign_count:unassign_count
+                            })
+                        })
+                        .catch(err=>{
+                            return res.status(500).json({
+                                error:err
+                            })
+                        }) 
+                })
+                .catch(err=>{
+                    return res.status(500).json({
+                        error:err
+                    })
+                })
+              
         }else{
             return res.render('client', {
                 sess: req.session
