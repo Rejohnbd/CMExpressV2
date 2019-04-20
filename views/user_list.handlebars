@@ -32,8 +32,8 @@
                 <td>{{ address }}</td>
                 <td>{{ devices.length }}</td>
                 <td class="center">
-                    <a href="/admin/viewuser/{{ _id }}" class="btn btn-sm btn-primary" title="View User"><i class="fas fa-eye"></i></a>
-                    <a href="/admin/deleteuser/{{ _id }}" class="btn btn-sm btn-danger" onclick="return confirm_delete()" title="Delete User"><i class="fas fa-trash"></i></a>
+                    <a href="/admin/{{ _id }}/viewuser" class="btn btn-sm btn-primary" title="View User"><i class="fas fa-eye"></i></a>
+                    <a href="/admin/{{ _id }}/deleteuser" class="btn btn-sm btn-danger" onclick="return confirm_delete()" title="Delete User"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
             {{/each}}

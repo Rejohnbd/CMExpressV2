@@ -9,9 +9,10 @@ const CMData = require('../model/cmdata')
 
 router.get('/', (req, res) => {
     sess = req.session
-    //console.log(sess)
+    console.log(sess)
     if (!sess.email) {
         //res.setHeader("Content-Type", "text/html")
+        // res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
         return res.redirect('login')
     }else{
         if(sess.admin == true){
@@ -63,7 +64,12 @@ router.get('/', (req, res) => {
 
 
 router.get('/logout', (req, res) => {
+    console.log('Before Destroy')
+    console.log(req.session.email)
     req.session.destroy()
+    console.log('After Destroy')
+    // console.log(session)
+    res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
     return res.redirect('login')
 })
 
@@ -80,7 +86,7 @@ router.post('/login', (req, res) => {
 
             if (user) {
                 bcrypt.compare(req.body.password, user.password, (err, result) => {
-                    console.log(err, result)
+                    //console.log(err, result)
                     if (err) {
                         console.log('Error Bcrypt')
                         return res.render('login', {
@@ -89,9 +95,9 @@ router.post('/login', (req, res) => {
                     }
 
                     if (result) {
-                        console.log('Success Bcrypt')
-                        console.log(user)
-                        console.log(user._id)
+                        // console.log('Success Bcrypt')
+                        // console.log(user)
+                        // console.log(user._id)
                         req.session.email = user.email
                         req.session.userid = user._id
                         req.session.admin = user.is_admin

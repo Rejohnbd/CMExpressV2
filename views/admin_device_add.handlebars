@@ -58,7 +58,7 @@
                 <textarea id="inputLocation" class="form-control" rows="3" name="location" placeholder="Location">{{#if data }}{{ data.location }}{{/if}}</textarea>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="isAssigned" name="is_assign" {{#if data.is_assign }}checked{{/if }} value="true">
+                <input class="form-check-input" type="checkbox" disabled id="isAssigned" name="is_assign" {{#if data.is_assign }}checked{{/if }} value="true">
                 <label class="form-check-label" for="isAssigned">
                     Is Assigned
                 </label>

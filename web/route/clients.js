@@ -20,7 +20,7 @@ router.get('/:id/devices', check_session, (req, res) => {
 })
 
 
-router.get('/view_device/:id', check_session, (req, res) => {
+router.get('/:id/view_device', check_session, (req, res) => {
     
     Device.findOne({ _id: req.params.id })
         .populate('devices')
@@ -33,7 +33,7 @@ router.get('/view_device/:id', check_session, (req, res) => {
 })
 
 
-router.get('/alldevics/:id', check_session, (req, res) => {
+router.get('/:id/alldevics', check_session, (req, res) => {
     User.findOne({ _id: req.params.id })
     .populate('devices')
     .exec()
@@ -48,7 +48,7 @@ router.get('/alldevics/:id', check_session, (req, res) => {
 
 
 //Profile Section
-router.get('/profile/:id', check_session, (req, res) => {
+router.get('/:id/profile', check_session, (req, res) => {
     
     User.findOne({ _id: req.params.id})
     .exec()
@@ -62,7 +62,7 @@ router.get('/profile/:id', check_session, (req, res) => {
 })
 
 
-router.get('/profile_edit/:id', check_session, (req, res) => {
+router.get('/:id/profile_edit', check_session, (req, res) => {
     User.findOne({ _id: req.params.id })
     .exec()
     .then( doc => {
@@ -182,6 +182,16 @@ router.post('/profile_update', check_session, upload.single('image'),(req, res) 
     }
 
 })
+
+// router.use((req,res,next)=>{
+//     console.log(req.path)
+//     const error = new Error();
+//     error.status=400;
+//     error.message = "Rrjohn not Match"
+//     // Send Error to the Next
+//     return res.render('404', { sess: sess })
+//     next(error);
+// })
 
 
 module.exports = router

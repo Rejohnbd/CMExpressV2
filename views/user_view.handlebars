@@ -30,10 +30,9 @@
                     NoDevice Assigned
                     {{/if}}
                 </p>
-                {{data._id}}
             </div>
             <div class="float-right p-2">
-                <a href="/admin/assigndevice/{{ data._id }}" class="btn btn-success btn-circle" title="Assign Device">
+                <a href="/admin/{{ data._id }}/assigndevice" class="btn btn-success btn-circle" title="Assign Device">
                     <i class="fas fa-plus"></i>
                 </a>
             </div>
@@ -51,7 +50,7 @@
         <div class="col-md-6" >
             <div class="card mt-2 mb-2 bg-light-black temCal" id="{{ device_id }}">
                 <ul class="list-group white-border user-device-list">
-                    <li class="list-group-item no-back white-border" style="border-radius: 0 !important">Device Id : <span class="float-right"><a href="/admin/view_device/{{ _id }}">{{ device_id }}</a></span></li>
+                    <li class="list-group-item no-back white-border" style="border-radius: 0 !important">Device Id : <span class="float-right"><a href="/admin/{{ _id }}/view_device">{{ device_id }}</a></span></li>
                     <li class="list-group-item no-back white-border">SIM Number : <span class="float-right">{{ sim_number }}</span></li>
                     <li class="list-group-item no-back white-border">Actived Date : <span class="float-right">23-06-2018</span></li>
                     <li class="list-group-item no-back white-border">Location: <span class="float-right">{{ location }}</span></li>
@@ -79,7 +78,7 @@
                     </div>
                     </div>
                 </div>
-                <a href="/admin/unassign/{{ _id }}/{{../data._id}}" class="btn btn-block btn-danger btn-sm">Unassign Device</a>
+                <a href="/admin/{{../data._id}}/unassign/{{ _id }}" class="btn btn-block btn-danger btn-sm">Unassign Device</a>
             </div>
         </div>          
         {{/each }}

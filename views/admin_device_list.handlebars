@@ -29,7 +29,7 @@
         <tbody>
             {{#each datas}}
             <tr>
-                <td><a href="/admin/view_device/{{ _id }}" class="text-white">{{ device_id }}</a></td>
+                <td><a href="/admin/{{ _id }}/view_device" class="text-white">{{ device_id }}</a></td>
                 <td>{{ sim_number }}</td>
                 <td>{{ location }}</td>
                 {{!-- <td>{{ tempareture_min }}</td>
@@ -45,7 +45,7 @@
                 </td>
                 <td class="center">
                     <a href="/admin/{{ _id }}" class="btn btn-sm btn-info" title="Edit Device"><i class="fas fa-edit"></i></a>
-                    <a href="/admin/delete/{{ _id }}" class="btn btn-sm btn-danger" title="Delete Device" onclick="return confirm_delete()"><i class="fas fa-trash"></i></a>
+                    <a href="/admin/{{ _id }}/delete" class="btn btn-sm btn-danger" title="Delete Device" onclick="return confirm_delete()"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
             {{/each }}

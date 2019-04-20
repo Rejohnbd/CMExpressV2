@@ -24,7 +24,7 @@ router.get('/users',check_admin, check_session, (req, res) => {
         })
 })
 
-router.get('/viewuser/:id', check_session, (req, res) => {
+router.get('/:id/viewuser', check_session, (req, res) => {
     
     User.findOne({ _id: req.params.id })
     .populate('devices')
@@ -37,7 +37,7 @@ router.get('/viewuser/:id', check_session, (req, res) => {
     })
 })
 
-router.get('/deleteuser/:id', (req, res) => {
+router.get('/:id/deleteuser', (req, res) => {
     User.deleteOne(
         { _id: req.params.id }
     )
@@ -49,7 +49,7 @@ router.get('/deleteuser/:id', (req, res) => {
         })
 })
 
-router.get('/assigndevice/:id', check_session, (req, res) => {
+router.get('/:id/assigndevice', check_session, (req, res) => {
     user_id = req.params.id 
     Device.find({ is_assign: false })
         .exec()
@@ -61,7 +61,7 @@ router.get('/assigndevice/:id', check_session, (req, res) => {
     // return res.send('HHHHHH')
 })
 
-router.get('/assign/:device_id/:user_id', (req, res) => {
+router.get('/:user_id/assign/:device_id', (req, res) => {
     // console.log("HHHHHHHHH")
     // return res.send("YYYYYYYYYYY")
 
@@ -81,7 +81,7 @@ router.get('/assign/:device_id/:user_id', (req, res) => {
                         device.is_assign=true
                         device.save()
 
-                        return res.redirect('/admin/assigndevice/'+user_id)
+                        return res.redirect('/admin/'+user_id+'/viewuser')
                     })
                     .catch(err=>{
                         return res.status(500).json({
@@ -98,7 +98,7 @@ router.get('/assign/:device_id/:user_id', (req, res) => {
     // return res.send('HHHHHH')
 })
 
-router.get('/view_device/:id', check_session, (req, res) => {
+router.get('/:id/view_device', check_session, (req, res) => {
     
     Device.findOne({ _id: req.params.id })
         .populate('devices')
@@ -110,7 +110,7 @@ router.get('/view_device/:id', check_session, (req, res) => {
         })
 })
 
-router.get('/unassign/:device_id/:user_id', (req, res) => {
+router.get('/:user_id/unassign/:device_id', (req, res) => {
 
     // console.log(req.params.device_id)
     // console.log(req.params.user_id)
@@ -132,7 +132,7 @@ router.get('/unassign/:device_id/:user_id', (req, res) => {
                         device.is_assign=false
                         device.save()
 
-                        return res.redirect('/admin/viewuser/'+user_id)
+                        return res.redirect('/admin/'+user_id+'/viewuser')
                     })
                     .catch(err=>{
                         return res.status(500).json({
@@ -225,7 +225,7 @@ router.post('/update', (req, res) => {
         })
 })
 
-router.get('/delete/:id', (req, res) => {
+router.get('/:id/delete', (req, res) => {
     Device.deleteOne(
         { _id: req.params.id }
     )
@@ -237,7 +237,7 @@ router.get('/delete/:id', (req, res) => {
         })
 })
 
-router.get('/view_device/:id', check_session, (req, res) => {
+router.get('/:id/view_device', check_session, (req, res) => {
     
     Device.findOne({ _id: req.params.id })
         .populate('devices')
@@ -252,7 +252,7 @@ router.get('/view_device/:id', check_session, (req, res) => {
 
 
 //Profile Section Start
-router.get('/profile/:id', check_session, (req, res) => {
+router.get('/:id/profile', check_session, (req, res) => {
     User.findOne({ _id: req.params.id })
         .exec()
         .then(doc => {
@@ -264,7 +264,7 @@ router.get('/profile/:id', check_session, (req, res) => {
         })
 })
 
-router.get('/profile_edit/:id', check_session, (req, res) => {
+router.get('/:id/profile_edit', check_session, (req, res) => {
     User.findOne({ _id: req.params.id })
         .exec()
         .then(doc => {
