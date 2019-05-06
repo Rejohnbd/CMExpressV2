@@ -4,7 +4,7 @@
         <li class="breadcrumb-item active" aria-current="page">Device Details</li>
     </ol>
 </nav>
-
+{{data}}
 <div class="row">
     <div class="col-md-4">
         <ul class="list-group">
@@ -26,7 +26,7 @@
         <ul class="list-group">
         <li class="list-group-item active white-border bg-black text-center">DOOR LOCK</li>
         <li class="list-group-item white-border bg-light-black text-center">
-            <img class="img-fluid" src="/static/images/off.jpg">
+            <img class="img-fluid" id="doorImage" src="/static/images/off.jpg">
         </li>
         </ul>
     </div>
@@ -103,8 +103,65 @@
     </div>
 </div>
 
+<script>
+    $("document").ready(function () {
+        var dataInfo ='';
 
- <script>
+        var chart = new FusionCharts({
+            type: 'thermometer',
+            renderAt: 'tempCalcu',
+            width: '150',
+            height: '300',
+            dataFormat: 'json',
+            dataSource: {
+                "chart": {
+                    "theme": "fusion",
+                    // "caption": "Central cold storage",
+                    // "subcaption": "Bakersfield Central",
+                    "subcaptionFontBold": "0",
+                    "lowerLimit": "{{ data.tempareture_min }}",
+                    "upperLimit": "{{ data.tempareture_max }}",
+                    "numberSuffix": "°C",
+                    "bgColor": "#ffffff",
+                    "showBorder": "0",
+                    "thmFillColor": "#008ee4"
+                },
+                "value":0 // dataInfo.temperature
+                }
+        }).render();                                                        
+
+
+        setInterval(function () {
+                $.ajax({
+                    {{!-- url: 'http://localhost:5000/cm/' + obj.id + '/last_data', --}}
+                    url: 'http://127.0.0.1/cm_random/read.php?id='+{{ data.device_id }},
+                    type: 'GET',
+                    success: function (dataInfo) {
+                        console.log(dataInfo)
+                        if (dataInfo) {
+                            if(dataInfo.door_lock == 0){
+                                document.getElementById('doorImage').src='/static/images/off.jpg'
+                            }else if(dataInfo.door_lock == 1){
+                                document.getElementById('doorImage').src='/static/images/on.jpg'
+                            }
+                            chart.setData(dataInfo.temperature)
+                        
+
+                           // console.log(chart.setData)
+                            
+
+                            //chart.dataSource.value = dataInfo.temperature
+                           
+
+
+                        }
+                    }
+                });
+        }, 5000);
+    });
+</script>
+
+<script>
     // Themes begin
     am4core.useTheme(am4themes_animated);
     // Themes end
@@ -156,7 +213,7 @@
     }
 </script>
 
-<script>
+{{!-- <script>
     $(document).ready(function () {
       FusionCharts.ready(function () {
         var chart = new FusionCharts({
@@ -193,32 +250,4 @@
           .render();
       });
     })
-</script>
-
-{{!-- <script>
-    $("document").ready(function () {
-
-        function showStr(val) {
-            if (val == '1') {
-                return "On";
-            } else {
-                return "Off";
-            }
-        }
-
-        setInterval(function () {
-            $.each($('.temCal'), function (index, obj) {
-                $.ajax({
-                    url: 'http://localhost:5000/cm/' + obj.id + '/last_data',
-                    type: 'GET',
-                    success: function (data) {
-                        if (data) {
-                            var device_id = data.device_id
-                            $('#' + device_id).html('<p>Temparature : ' + data.temperature + '</p><p>Humidity : ' + data.humidity + '</p><p>Door Lock : ' + showStr(data.door_lock) + '</p>')
-                        }
-                    }
-                });
-            })
-        }, 3000);
-    });
 </script> --}}

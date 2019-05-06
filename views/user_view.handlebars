@@ -102,7 +102,8 @@
             $.each($('.temCal'), function (index, obj) {
                 console.log(obj.id)
                 $.ajax({
-                    url: 'http://localhost:5000/cm/' + obj.id + '/last_data',
+                    {{!-- url: 'http://localhost:5000/cm/' + obj.id + '/last_data', --}}
+                    url: 'http://127.0.0.1/cm_random/read.php?id='+ obj.id,
                     type: 'GET',
                     success: function (data) {
                         if (data) {
@@ -114,6 +115,6 @@
                     }
                 });
             })
-        }, 3000);
+        }, 5000);
     });
 </script>

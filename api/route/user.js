@@ -217,7 +217,7 @@ router.put("/:userId", upload.single('image'), (req, res, next) => {
     const phone = req.body.phone
     const address = req.body.address
 
-    // console.log(file)
+     console.log(file)
 
     // console.log(mongoose.Types.ObjectId.isValid('5c838f8b44420833a8a99b99'))
 
