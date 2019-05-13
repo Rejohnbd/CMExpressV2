@@ -1,4 +1,4 @@
 node_modules
 .env
-/api/firebase/
+/api/firebase/service_account.json
 /public/uploads/

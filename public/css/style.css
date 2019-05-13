@@ -214,3 +214,7 @@ textarea {
 .custom-file:hover{
   cursor: pointer !important;
 }
+
+.custom-file-input{
+  opacity: 1 !important;
+}
