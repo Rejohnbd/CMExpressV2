@@ -4,7 +4,7 @@
         <li class="breadcrumb-item active" aria-current="page">Device Details</li>
     </ol>
 </nav>
-{{data}}
+{{!-- {{data}} --}}
 <div class="row">
     <div class="col-md-4">
         <ul class="list-group">
@@ -26,7 +26,9 @@
         <ul class="list-group">
         <li class="list-group-item active white-border bg-black text-center">DOOR LOCK</li>
         <li class="list-group-item white-border bg-light-black text-center">
+            <br/>
             <img class="img-fluid" id="doorImage" src="/static/images/off.jpg">
+            <br/><br/>
         </li>
         </ul>
     </div>
@@ -34,7 +36,7 @@
 
 <div class="card mt-5 mb-5 white-border">
     <div class="card-header bg-black text-center">
-        STATR UP
+        START UP
     </div>
     <div class="card-body bg-light-black">
         <div class="row">
@@ -44,7 +46,7 @@
                     Manimum Temperature
                 </div>
                 <div class="card-body bg-success">
-                    <h3 class="card-title">{{ data.tempareture_min }} <sup>o</sup>C</h3>
+                    <h3 class="card-title text-center">{{ data.tempareture_min }} <sup>o</sup>C</h3>
                 </div>
             </div>
         </div>
@@ -56,7 +58,7 @@
                     title="Change Minimum Temp"><i class="far fa-edit"></i></button>
                 </div>
                 <div class="card-body bg-danger">
-                    <h3 class="card-title">{{ data.tempareture_max }} <sup>o</sup>C</h3>
+                    <h3 class="card-title text-center">{{ data.tempareture_max }} <sup>o</sup>C</h3>
                 </div>
             </div>
         </div>
@@ -68,7 +70,7 @@
                     title="Change Minimum Temp"><i class="far fa-edit"></i></button>
                 </div>
                 <div class="card-body bg-success">
-                    <h3 class="card-title">{{ data.humidity_min }} <sup>o</sup>C</h3>
+                    <h3 class="card-title text-center">{{ data.humidity_min }} %</h3>
                 </div>
             </div>
         </div>
@@ -80,7 +82,7 @@
                     title="Change Minimum Temp"><i class="far fa-edit"></i></button>
                 </div>
                 <div class="card-body bg-danger">
-                    <h3 class="card-title">{{ data.humidity_max }} <sup>o</sup>C</h3>
+                    <h3 class="card-title text-center">{{ data.humidity_max }} %</h3>
                 </div>
             </div>
         </div>
@@ -98,7 +100,7 @@
         <li class="list-group-item no-back white-border">SIM Number : <span class="float-right">{{ data.sim_number }}</span></li>
         <li class="list-group-item no-back white-border">Actived Date : <span class="float-right">{{ data.date }}</span></li>
         <li class="list-group-item no-back white-border">Location : <span class="float-right">{{ data.location }}</span></li>
-        <li class="list-group-item no-back white-border" style="border-radius: 0 !important">Vestibulum at eros</li>
+        {{!-- <li class="list-group-item no-back white-border" style="border-radius: 0 !important">Vestibulum at eros</li> --}}
         </ul>
     </div>
 </div>
@@ -128,8 +130,51 @@
                 },
                 "value":0 // dataInfo.temperature
                 }
-        }).render();                                                        
+        }).render();
 
+
+
+        // Themes begin
+    am4core.useTheme(am4themes_animated);
+    // Themes end
+
+    // create chart
+    var humiChart = am4core.create("deviceTemp", am4charts.GaugeChart);
+    humiChart.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+
+    humiChart.innerRadius = -25;
+
+    var axis = humiChart.xAxes.push(new am4charts.ValueAxis());
+    axis.min = 0;
+    axis.max = 100;
+    axis.strictMinMax = true;
+    axis.renderer.grid.template.stroke = new am4core.InterfaceColorSet().getFor("background");
+    axis.renderer.grid.template.strokeOpacity = 0.3;
+
+    var colorSet = new am4core.ColorSet();
+
+    var range0 = axis.axisRanges.create();
+    range0.value = 0;
+    range0.endValue = 50;
+    range0.axisFill.fillOpacity = 1;
+    range0.axisFill.fill = colorSet.getIndex(0);
+    range0.axisFill.zIndex = - 1;
+
+    var range1 = axis.axisRanges.create();
+    range1.value = 50;
+    range1.endValue = 80;
+    range1.axisFill.fillOpacity = 1;
+    range1.axisFill.fill = colorSet.getIndex(2);
+    range1.axisFill.zIndex = -1;
+
+    var range2 = axis.axisRanges.create();
+    range2.value = 80;
+    range2.endValue = 100;
+    range2.axisFill.fillOpacity = 1;
+    range2.axisFill.fill = colorSet.getIndex(4);
+    range2.axisFill.zIndex = -1;
+
+    var hand = humiChart.hands.push(new am4charts.ClockHand());
 
         setInterval(function () {
                 $.ajax({
@@ -145,23 +190,26 @@
                                 document.getElementById('doorImage').src='/static/images/on.jpg'
                             }
                             chart.setData(dataInfo.temperature)
-                        
-
-                           // console.log(chart.setData)
-                            
-
-                            //chart.dataSource.value = dataInfo.temperature
-                           
-
-
+                            humiChart.setTimeout(randomValue);
+                            function randomValue() {
+                                hand.showValue(dataInfo.humidity, 500, am4core.ease.cubicOut);
+                            } 
                         }
                     }
                 });
-        }, 5000);
+        }, 8000);
     });
 </script>
 
 <script>
+    
+</script>
+
+
+
+
+
+{{!-- <script>
     // Themes begin
     am4core.useTheme(am4themes_animated);
     // Themes end
@@ -211,43 +259,4 @@
       hand.showValue(Math.random() * 100, 1000, am4core.ease.cubicOut);
       chart.setTimeout(randomValue, 2000);
     }
-</script>
-
-{{!-- <script>
-    $(document).ready(function () {
-      FusionCharts.ready(function () {
-        var chart = new FusionCharts({
-          type: 'thermometer',
-          renderAt: 'tempCalcu',
-          id: 'temp-monitor',
-          width: '150',
-          height: '300',
-          dataFormat: 'json',
-          dataSource: {
-            "chart": {
-              "theme": "fusion",
-              // "caption": "Central cold storage",
-              // "subcaption": "Bakersfield Central",
-              "subcaptionFontBold": "0",
-              "lowerLimit": "{{ data.tempareture_min }}",
-              "upperLimit": "{{ data.tempareture_max }}",
-              "numberSuffix": "°C",
-              "bgColor": "#ffffff",
-              "showBorder": "0",
-              "thmFillColor": "#008ee4"
-            },
-            "value": "0"
-          },
-          "events": {
-            "rendered": function (evtObj, argObj) {
-              var intervalVar = setInterval(function () {
-                var temp = 0 + parseInt(Math.floor(Math.random() * 6), 10);
-                FusionCharts.items["temp-monitor"].feedData("value=" + temp);
-              }, 3000);
-            }
-          }
-        })
-          .render();
-      });
-    })
 </script> --}}

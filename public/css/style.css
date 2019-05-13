@@ -215,6 +215,11 @@ textarea {
   cursor: pointer !important;
 }
 
+/*Edit By Rejohn From Home*/
 .custom-file-input{
   opacity: 1 !important;
+}
+
+.text-center{
+  text-align: center !important;
 }

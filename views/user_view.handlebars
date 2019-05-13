@@ -63,7 +63,7 @@
                             Temperature
                         </div>
                         <div class="card-body bg-success">
-                            <h3 class="temp-title card-title"></h3>
+                            <h3 class="temp-title card-title text-center"></h3>
                         </div>
                     </div>
                     </div>
@@ -73,7 +73,7 @@
                             Humidity
                         </div>
                         <div class="card-body bg-warning">
-                            <h3 class="card-title"></h3>
+                            <h3 class="card-title text-center"></h3>
                         </div>
                     </div>
                     </div>
@@ -110,7 +110,7 @@
                             var device_id = data.device_id
                             $('#' + device_id + '>ul>li:last' ).html('Door Lock: <span class="float-right">'+ showStr(data.door_lock) +'</span>');
                             $('#' + device_id).find('h3:first').html(data.temperature +' <sup>o</sup>C');
-                            $('#' + device_id).find('h3:last').html(data.humidity +' <sup>o</sup>C');
+                            $('#' + device_id).find('h3:last').html(data.humidity +'%');
                         }
                     }
                 });
