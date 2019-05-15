@@ -45,7 +45,6 @@
             <div class="card text-white mb-3">
                 <div class="card-header bg-black text-center temp-humi-edit dropleft">
                     Manimum Temperature
-                    {{!-- <button class="float-right no-back no-border" data-toggle="tooltip" data-placement="top" data-toggle="modal" data-target="#minTempChange" title="Change Minimum Temperature"><i class="far fa-edit"></i></button> --}}
                     <button class="float-right no-back no-border"  data-toggle="modal" data-target="#minTempChange" title="Change Minimum Temperature"><i class="far fa-edit"></i></button>
                 </div>
                 <div class="card-body bg-success">
@@ -57,8 +56,7 @@
             <div class="card text-white mb-3">
                 <div class="card-header bg-black text-center temp-humi-edit dropleft">
                     Maximum Temperature
-                    <button class="float-right no-back no-border" data-toggle="tooltip" data-placement="top"
-                    title="Change Minimum Temp"><i class="far fa-edit"></i></button>
+                    <button class="float-right no-back no-border"  data-toggle="modal" data-target="#maxTempChange" title="Change Maximum Temperature"><i class="far fa-edit"></i></button>
                 </div>
                 <div class="card-body bg-danger">
                     <h3 class="card-title text-center">{{ data.tempareture_max }} <sup>o</sup>C</h3>
@@ -69,8 +67,7 @@
             <div class="card text-white mb-3">
                 <div class="card-header bg-black text-center temp-humi-edit dropleft">
                     Manimum Humidity
-                    <button class="float-right no-back no-border" data-toggle="tooltip" data-placement="top"
-                    title="Change Minimum Temp"><i class="far fa-edit"></i></button>
+                    <button class="float-right no-back no-border"  data-toggle="modal" data-target="#minHumiChange" title="Change Minimum Humidity"><i class="far fa-edit"></i></button>
                 </div>
                 <div class="card-body bg-success">
                     <h3 class="card-title text-center">{{ data.humidity_min }}%</h3>
@@ -81,8 +78,7 @@
             <div class="card text-white mb-3">
                 <div class="card-header bg-black text-center temp-humi-edit dropleft">
                     Maximum Humidity
-                    <button class="float-right no-back no-border" data-toggle="tooltip" data-placement="top"
-                    title="Change Minimum Temp"><i class="far fa-edit"></i></button>
+                    <button class="float-right no-back no-border"  data-toggle="modal" data-target="#maxHumiChange" title="Change Maximum Humidity"><i class="far fa-edit"></i></button>
                 </div>
                 <div class="card-body bg-danger">
                     <h3 class="card-title text-center">{{ data.humidity_max }}%</h3>
@@ -108,24 +104,26 @@
     </div>
 </div>
 
-  {{!-- <div class="modal fade" id="minTempChange" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="minTempChange" tabindex="-1" role="dialog" aria-labelledby="changeMinTemp" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-black">
-          <h5 class="modal-title" id="exampleModalLabel">Change  Minimum Temperature ?</h5>
+          <h5 class="modal-title" id="changeMinTemp">Change  Minimum Temperature ?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
+        <div class="modal-body">
+            No
+        </div>
         
         <div class="modal-footer">
           <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="/logout">Logout</a>
+          <a class="btn btn-primary" href="">Update Minimum Temperature</a>
         </div>
       </div>
     </div>
-  </div> --}}
+  </div>
 
 
 
